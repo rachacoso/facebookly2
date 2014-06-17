@@ -42,3 +42,8 @@ gem "mongoid", "~> 4.0.0.rc1", github: 'mongoid/mongoid'
 
 gem 'rest-client'
 
+gem 'bootstrap-sass', '~> 3.1.1'
+
+gem 'bootstrap_form'
+
+

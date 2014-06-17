@@ -1,0 +1,29 @@
+
+<div class="well well-sm">
+	<a href="/">Home</a>
+</div>
+
+<div class="container">
+
+<%= bootstrap_form_for User.new, url: '/signup' do |f| %>
+
+<div class="col-sm-8">
+	<div class="well">
+		<div class="row">
+			<div class="col-sm-6">
+				<%= f.text_field :firstname %>
+			</div>
+			<div class="col-sm-6">
+				<%= f.text_field :lastname %>
+			</div>
+		</div>
+		<%= f.email_field :email %>
+		<%= f.password_field :password %>
+		<%= f.password_field :password_confirmation %>
+		<%= f.submit 'Join!' %>
+	</div>
+</div>
+<% end %>
+
+
+</div>

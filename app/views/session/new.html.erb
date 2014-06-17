@@ -1,0 +1,36 @@
+<div class="well well-sm">
+	<a href="/">Home</a>
+</div>
+
+
+<div class="container">
+
+<%= bootstrap_form_tag url: '/login' do |f| %>
+
+
+<div class="col-sm-8">
+	<div class="well">
+		<% if flash[:notice] %>
+			<div class="alert alert-danger"><%= flash[:notice] %></div>
+		<% end %>
+		<div class="row">
+			<div class="col-sm-6">
+				<%= f.email_field :email %>
+			</div>
+			<div class="col-sm-6">
+				<%= f.password_field :password %>
+			</div>
+		</div>
+		<%= f.submit 'Login' %>
+	</div>
+</div>
+
+
+<% end %>
+
+
+
+
+
+
+</div>
