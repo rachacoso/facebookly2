@@ -3,8 +3,11 @@ class Friend
 
 	field :friend_uid
 	field :initial_request_message
-	field :accepted, type: Boolean
-	belongs_to :user
+	field :reciprocal, type: Boolean
+	field :requestor, type: Boolean
+	embedded_in :user
+
+
 
 	def get_profile #get profile info of the friend
 

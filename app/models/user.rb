@@ -10,7 +10,7 @@ class User
 
 	validate :email, presence: true, uniqueness: true
 
-	has_many :friends
+	embeds_many :friends
 
 	has_many :posts
 

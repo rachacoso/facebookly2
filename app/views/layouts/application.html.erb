@@ -12,7 +12,9 @@
 		<h4> Facebook.ly</h4>
 	</div>
 
-
+<div class="well well-sm">
+	<%= @current_user ? "Hello #{@current_user.firstname}! <a href=\"/logout\">Logout</a>".html_safe : "<a href=\"/signup\">Join Facebookly</a> or <a href=\"/login\">Login</a>".html_safe %>
+</div>
 <%= yield %>
 
 </body>

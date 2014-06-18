@@ -11,6 +11,10 @@ Rails.application.routes.draw do
 
   get '/friend/:id' => 'friend#new'
   post '/friend' => 'friend#create'
+  get '/friend/deny/:id' => 'friend#destroy'
+  get '/friend/nevermind/:id' => 'friend#destroy'
+
+  get '/friend' => 'home#front'
 
 
 

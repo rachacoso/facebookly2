@@ -16,7 +16,9 @@
 				<%= f.text_area :initial_request_message %>
 			</div>
 		</div>
+		<%= hidden_field_tag 'friendid', @friend_to_be.id %>
 		<%= f.submit 'Hey! Be my friend!' %>
+		<a href="/">&lt; Whoa! I'm not ready for friends yet!</a>
 	</div>
 </div>
 <% end %>
