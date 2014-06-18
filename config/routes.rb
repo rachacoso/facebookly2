@@ -13,6 +13,7 @@ Rails.application.routes.draw do
   post '/friend' => 'friend#create'
   get '/friend/deny/:id' => 'friend#destroy'
   get '/friend/nevermind/:id' => 'friend#destroy'
+  get '/friend/accept/:id' => 'friend#accept'
 
   get '/friend' => 'home#front'
 

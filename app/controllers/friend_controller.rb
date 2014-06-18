@@ -20,7 +20,9 @@ class FriendController < ApplicationController
 		friend_requestee.requestor = false
 		friend_requestee.save!
 
-		@friend_to_be = requestee
+		# flash[:requestsent] = "Your request has been sent to #{requestee.firstname}"
+
+		redirect_to '/', :flash => { :requestsent => "Your request has been sent to #{requestee.firstname}" }
 
 	end
 
@@ -36,5 +38,22 @@ class FriendController < ApplicationController
 		redirect_to '/'
 
 	end
+
+	def accept
+
+		requestor = User.where(id: params[:id]).first
+		b = requestor.friends.where(friend_uid: session[:user_id]).first
+		b.reciprocal = true
+		requestor.save!
+
+		requestee = User.where(id: session[:user_id]).first
+		a = requestee.friends.where(friend_uid: params[:id]).first
+		a.reciprocal = true
+		requestee.save!
+
+		redirect_to '/'
+
+	end
+
 
 end

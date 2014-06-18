@@ -11,8 +11,8 @@
 	<div class="container">
 		<h3>Here are your future friends!!</h3>
 		<% @allpeople.each do |person| %>
-			<% next if person.id == @current_user.id %>
-			<% next if @inqueue.include? person.id %>
+			hi
+			
 			
 			<%= person.firstname %> <%= person.lastname %><a href='/friend/<%= person.id %>'>, be my friend! </a>
 			<br>
@@ -20,7 +20,7 @@
 		<% end %>
 	
 
-	<% if @wants_to_be_my_friend %>
+	<% unless @wants_to_be_my_friend.empty? %>
 		<h3>Someone wants to be your friend!!</h3>
 		<% @wants_to_be_my_friend.each do |request| %>
 
@@ -31,8 +31,14 @@
 	<% end %>
 
 
-	<% if @want_to_be_their_friend %>
+	<% unless @want_to_be_their_friend.empty? %>
 		<h3>Here are the people you've sent friend requests to!!</h3>
+		<% if flash[:requestsent] %>
+			<div class="alert alert-success alert-dismissable">
+		  <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+		  <%= flash[:requestsent] %>
+			</div>
+		<% end %>
 		<% @want_to_be_their_friend.each do |request| %>
 
 			<%= request.firstname %> <%= request.lastname %> <a href='/friend/nevermind/<%= request.id %>'> I changed my mind!</a>
@@ -41,6 +47,16 @@
 
 	<% end %>
 
+
+	<% unless @myfriends.empty? %>
+		<h3>Here are your friends!!</h3>
+		<% @myfriends.each do |friend| %>
+
+			<%= friend.firstname %> <%= friend.lastname %> <a href='/friend/view/<%= friend.id %>'> View friend's profile</a>
+			<br>
+		<% end %>
+
+	<% end %>
 
 	</div>
 <% end %>

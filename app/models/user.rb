@@ -10,9 +10,21 @@ class User
 
 	validate :email, presence: true, uniqueness: true
 
-	embeds_many :friends
+	embeds_many :friends do 
+		def i_asked
+			where(reciprocal: false, requestor: true)
+		end
+		def who_asked_me
+			where(reciprocal: false, requestor: false)
+		end
+		def accepted
+			where(reciprocal: true)
+		end
+	end
 
 	has_many :posts
+
+
 
 	has_secure_password
 
