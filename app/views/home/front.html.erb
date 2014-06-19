@@ -26,15 +26,11 @@
 			<% message = @current_user.friends.get_message(request.id.to_s) %>	
 			<p>
 			<%= request.firstname %> <%= request.lastname %> 
-<<<<<<< HEAD
+
 
 			<% unless @friendrequestmessages[request.id.to_s].empty? %>
 			says <%= @friendrequestmessages[request.id.to_s] %><br>
-=======
-			
-			<% unless message.empty? %>
-			says <%= message %>
->>>>>>> cd82414d2fe61bf23aa3da6578a1b358c4b4d070
+
 			<% end %><br>
 			 <a href='/friend/accept/<%= request.id %>'>I accept! </a> <a href='/friend/deny/<%= request.id %>'>No way! </a>
 			<br>
