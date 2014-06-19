@@ -23,9 +23,16 @@
 	<% unless @wants_to_be_my_friend.empty? %>
 		<h3>Someone wants to be your friend!!</h3>
 		<% @wants_to_be_my_friend.each do |request| %>
-
-			<%= request.firstname %> <%= request.lastname %> <a href='/friend/accept/<%= request.id %>'>I accept! </a> <a href='/friend/deny/<%= request.id %>'>No way! </a>
+			<% message = @current_user.friends.get_message(request.id.to_s) %>	
+			<p>
+			<%= request.firstname %> <%= request.lastname %> 
+			
+			<% unless message.empty? %>
+			says <%= message %>
+			<% end %><br>
+			 <a href='/friend/accept/<%= request.id %>'>I accept! </a> <a href='/friend/deny/<%= request.id %>'>No way! </a>
 			<br>
+			</p>
 		<% end %>
 
 	<% end %>
