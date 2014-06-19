@@ -29,9 +29,10 @@
 
 
 			<% unless @friendrequestmessages[request.id.to_s].empty? %>
-			says <%= @friendrequestmessages[request.id.to_s] %><br>
+			says <%= @friendrequestmessages[request.id.to_s] %>
 
-			<% end %><br>
+			<% end %>
+			<br>
 			 <a href='/friend/accept/<%= request.id %>'>I accept! </a> <a href='/friend/deny/<%= request.id %>'>No way! </a>
 			<br>
 			</p>
