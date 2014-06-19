@@ -6,7 +6,7 @@ class FriendController < ApplicationController
 
 	def create
 
-		requestor = User.where(id: session[:user_id]).first
+		requestor = @current_user
 		friend_requestor = requestor.friends.find_or_initialize_by(friend_uid: params[:friendid])
 		friend_requestor.initial_request_message = params[:friend][:initial_request_message]
 		friend_requestor.reciprocal = false
@@ -27,7 +27,7 @@ class FriendController < ApplicationController
 	end
 
 	def destroy
-		requestor = User.where(id: session[:user_id]).first
+		requestor = @current_user
 		a = requestor.friends.where(friend_uid: params[:id]).first
 		requestor.friends.delete(a)
 
@@ -46,7 +46,7 @@ class FriendController < ApplicationController
 		b.reciprocal = true
 		requestor.save!
 
-		requestee = User.where(id: session[:user_id]).first
+		requestee = @current_user
 		a = requestee.friends.where(friend_uid: params[:id]).first
 		a.reciprocal = true
 		requestee.save!

@@ -17,6 +17,8 @@ Rails.application.routes.draw do
 
   get '/friend' => 'home#front'
 
+  get '/preferences/edituser' => 'user#update'
+  patch '/preferences/edituser' => 'user#do_update'
 
 
 end

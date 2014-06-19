@@ -10,6 +10,8 @@ class User
 
 	validate :email, presence: true, uniqueness: true
 
+
+
 	embeds_many :friends do 
 		def i_asked
 			where(reciprocal: false, requestor: true)
@@ -19,6 +21,9 @@ class User
 		end
 		def accepted
 			where(reciprocal: true)
+		end
+		def get_message(id)
+			where(friend_uid: id).first.initial_request_message
 		end
 	end
 
