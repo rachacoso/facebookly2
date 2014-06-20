@@ -13,8 +13,18 @@
 	</div>
 
 <div class="well well-sm">
-	<%= @current_user ? "Hello #{@current_user.firstname}! <a href=\"/logout\">Logout</a> <a href=\"/preferences/edituser\">Edit your info</a>".html_safe : "<a href=\"/signup\">Join Facebookly</a> or <a href=\"/login\">Login</a>".html_safe %>
+	<% if @current_user %>
+
+		Hello <%= @current_user.firstname %>! | <a href="/logout">Logout</a> | <a href="/preferences/edituser">Edit your info</a> | <%= Time.now.strftime("%I:%M:%S %Z") %>
+
+	<% else %>
+
+	<a href=\"/signup\">Join Facebookly</a> or <a href=\"/login\">Login</a>
+
+	<% end %>
 </div>
+
+
 <%= yield %>
 
 </body>

@@ -55,5 +55,11 @@ class FriendController < ApplicationController
 
 	end
 
+	def view
+		@friend = User.where(id: params[:id]).first
+		@wall_posts = @friend.postedtome
+
+	end
+
 
 end

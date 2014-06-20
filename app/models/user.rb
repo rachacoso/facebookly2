@@ -10,7 +10,12 @@ class User
 
 	validate :email, presence: true, uniqueness: true
 
+	embeds_one :publicprofile
 
+	embeds_one :privateprofile
+
+	has_and_belongs_to_many :postedtome, class_name: "Post", inverse_of: :postees
+	has_and_belongs_to_many :postedbyme, class_name: "Post", inverse_of: :posters
 
 	embeds_many :friends do 
 		def i_asked
@@ -26,10 +31,6 @@ class User
 			where(friend_uid: id).first.initial_request_message
 		end
 	end
-
-	has_many :posts
-
-
 
 	has_secure_password
 

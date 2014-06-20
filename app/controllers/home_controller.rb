@@ -33,6 +33,10 @@ class HomeController < ApplicationController
 			# get all others
 			@allpeople = User.not_in(:_id => @inqueue).order_by(:lastname.asc)
 
+			# get wall posts
+			@wall_posts = @current_user.postedtome
+
+
 		end
 
 	end

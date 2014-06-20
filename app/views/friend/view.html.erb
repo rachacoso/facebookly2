@@ -1,0 +1,37 @@
+
+<div class="container">
+
+	<h4><%= @friend.firstname %><br>
+	<%= @friend.lastname %></h4>
+
+
+	<div class="container wall">
+		
+		<h3> <%= @friend.firstname %> <%= @friend.lastname %>'s Wall </h3>
+		<% if @wall_posts.empty? %>
+			<h5>No Posts Yet!</h5>
+		<% else %>
+
+			<% @wall_posts.each do |post| %>
+				
+				<p>
+				<%= post.posters.first.firstname %> said<br>
+				<%= post.content %><br>
+				<%= post.c_at.strftime("at %I:%M%p %Z on %m/%d/%Y") %>
+				</p>
+			<% end %>
+
+		<% end %>
+		
+		<div class="well well-sm wallpostform">
+		<%= bootstrap_form_for Post.new, url: '/post' do |f| %>
+			<%= f.hidden_field :postee_id, value: @friend.id%>
+			<%= f.text_area	:content %>
+		
+			<%= f.submit "Post to #{@friend.firstname}'s wall!" %>
+
+		<% end %>
+		</div>	<!-- .well .well-sm -->
+	</div> <!-- .container .wall-->
+
+</div> <!-- .container -->

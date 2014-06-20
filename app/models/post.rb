@@ -1,9 +1,10 @@
 class Post
 	include Mongoid::Document
-
-
-	field :on_wall_of, type: String
+	include Mongoid::Timestamps::Short
+	
 	field :content, type: String
 
-	belongs_to :user
+	has_and_belongs_to_many :posters, class_name: "User", inverse_of: :postedbyme
+	has_and_belongs_to_many :postees, class_name: "User", inverse_of: :postedtome
+
 end

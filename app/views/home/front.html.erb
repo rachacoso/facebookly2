@@ -2,11 +2,7 @@
 
 
 <% if @current_user %>
-	<div class="container">
-	<div class="well well-sm">
-	<%= Time.now.strftime("%I:%M:%S %Z") %>
-	</div>
-	</div>
+
 
 	<div class="container">
 		<h3>Here are your future friends!!</h3>
@@ -20,53 +16,85 @@
 		<% end %>
 	
 
-	<% unless @wants_to_be_my_friend.empty? %>
-		<h3>Someone wants to be your friend!!</h3>
-		<% @wants_to_be_my_friend.each do |request| %>
-			<% message = @current_user.friends.get_message(request.id.to_s) %>	
-			<p>
-			<%= request.firstname %> <%= request.lastname %> 
+		<% unless @wants_to_be_my_friend.empty? %>
+			<h3>Someone wants to be your friend!!</h3>
+			<% @wants_to_be_my_friend.each do |request| %>
+				<% message = @current_user.friends.get_message(request.id.to_s) %>	
+				<p>
+				<%= request.firstname %> <%= request.lastname %> 
 
 
-			<% unless @friendrequestmessages[request.id.to_s].empty? %>
-			says <%= @friendrequestmessages[request.id.to_s] %>
+				<% unless @friendrequestmessages[request.id.to_s].empty? %>
+				says <%= @friendrequestmessages[request.id.to_s] %>
 
+				<% end %>
+				<br>
+				 <a href='/friend/accept/<%= request.id %>'>I accept! </a> <a href='/friend/deny/<%= request.id %>'>No way! </a>
+				<br>
+				</p>
 			<% end %>
-			<br>
-			 <a href='/friend/accept/<%= request.id %>'>I accept! </a> <a href='/friend/deny/<%= request.id %>'>No way! </a>
-			<br>
-			</p>
+
 		<% end %>
 
-	<% end %>
 
+		<% unless @want_to_be_their_friend.empty? %>
+			<h3>Here are the people you've sent friend requests to!!</h3>
+			<% if flash[:requestsent] %>
+				<div class="alert alert-success alert-dismissable">
+			  <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+			  <%= flash[:requestsent] %>
+				</div>
+			<% end %>
+			<% @want_to_be_their_friend.each do |request| %>
 
-	<% unless @want_to_be_their_friend.empty? %>
-		<h3>Here are the people you've sent friend requests to!!</h3>
-		<% if flash[:requestsent] %>
-			<div class="alert alert-success alert-dismissable">
-		  <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
-		  <%= flash[:requestsent] %>
-			</div>
-		<% end %>
-		<% @want_to_be_their_friend.each do |request| %>
+				<%= request.firstname %> <%= request.lastname %> <a href='/friend/nevermind/<%= request.id %>'> I changed my mind!</a>
+				<br>
+			<% end %>
 
-			<%= request.firstname %> <%= request.lastname %> <a href='/friend/nevermind/<%= request.id %>'> I changed my mind!</a>
-			<br>
-		<% end %>
-
-	<% end %>
-
-
-	<% unless @myfriends.empty? %>
-		<h3>Here are your friends!!</h3>
-		<% @myfriends.each do |friend| %>
-
-			<%= friend.firstname %> <%= friend.lastname %> <a href='/friend/view/<%= friend.id %>'> View friend's profile</a>
-			<br>
 		<% end %>
 
-	<% end %>
 
-	</div>
+		<% unless @myfriends.empty? %>
+			<h3>Here are your friends!!</h3>
+			<% @myfriends.each do |friend| %>
+
+				<%= friend.firstname %> <%= friend.lastname %> <a href='/view/<%= friend.id %>'> View friend's profile</a>
+				<br>
+			<% end %>
+
+		<% end %>
+
+	</div> <!-- .container -->
+
+	<div class="container wall">
+		
+		<h3> Your Wall </h3>
+		<% if @wall_posts.empty? %>
+			<h5>No Posts Yet!</h5>
+		<% else %>
+
+			<% @wall_posts.each do |post| %>
+				
+				<p>
+				<%= post.posters.first.firstname %> said<br>
+				<%= post.content %><br>
+				<%= post.c_at.strftime("at %I:%M%p %Z on %m/%d/%Y") %>
+				</p>
+			<% end %>
+
+		<% end %>
+		
+		<div class="well well-sm wallpostform">
+		<%= bootstrap_form_for Post.new, url: '/post' do |f| %>
+			<%= f.hidden_field :postee_id, value: session[:user_id]%>
+			<%= f.text_area	:content %>
+		
+			<%= f.submit 'Post to your wall!' %>
+
+		<% end %>
+		</div>	<!-- .well .well-sm -->
+	</div> <!-- .container .wall-->
+
+
+
 <% end %>

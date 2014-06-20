@@ -20,5 +20,9 @@ Rails.application.routes.draw do
   get '/preferences/edituser' => 'user#update'
   patch '/preferences/edituser' => 'user#do_update'
 
+  post '/post' => 'post#create'
+
+  get '/view/:id' => 'friend#view'
+
 
 end
