@@ -1,17 +1,19 @@
 
-
+<div class="backpanel">
+	<strong>Now viewing <%= @friend.publicprofile.firstname %>	<%= @friend.publicprofile.lastname %>'s Profile Page</strong>
+</div>
 <div class="backpanel">
 	
 	<%= image_tag show_profile_photo(@friend, :small), size: "100x100" %>
-	<h4><%= @friend.publicprofile.firstname %>	<%= @friend.publicprofile.lastname %></h4> <%= link_to 'Home', homepage_path %>
+	<h4><%= @friend.publicprofile.firstname %>	<%= @friend.publicprofile.lastname %></h4> 
 
 
-	<div class="toppanel">
+	<div class="backpanel">
 		<h5> <%= @friend.publicprofile.firstname %>'s Friends </h5>
-
-		<%= render partial: "shared/friend", collection: @friends_of_friend, locals: {connection: "friends"} %>
-
-	</div> <!-- .toppanel -->
+		<div class="backpanel">
+			<%= render partial: "shared/friend", collection: @friends_of_friend, locals: {connection: "friends"} %>
+		</div>
+	</div> <!-- .backpanel -->
 
 	<%= render 	partial: "shared/wall", locals: { wall_posts: @wall_posts, who: @friend } %>
 
