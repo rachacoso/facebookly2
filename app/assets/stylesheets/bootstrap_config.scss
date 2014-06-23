@@ -17,7 +17,7 @@ $brand-info:            #5bc0de !default;
 $brand-warning:         #f0ad4e !default;
 $brand-danger:          #d9534f !default;
 
-
+$backpanel-color: 			#ffffff !default;
 
 
 //== Scaffolding
@@ -25,9 +25,9 @@ $brand-danger:          #d9534f !default;
 //## Settings for some of the most global styles.
 
 //** Background color for `<body>`.
-$body-bg:               $gray-light !default;
+$body-bg:               #ffffff !default;
 //** Global text color on `<body>`.
-$text-color:            $gray-lighter !default;
+$text-color:            $gray !default;
 
 //** Global textual link color.
 $link-color:            $brand-primary !default;
@@ -103,7 +103,7 @@ $line-height-small:         1.5 !default;
 
 $border-radius-base:        4px !default;
 $border-radius-large:       6px !default;
-$border-radius-small:       3px !default;
+$border-radius-small:       0px !default;
 
 //** Global color for active items (e.g., navs or dropdowns).
 $component-active-color:    #fff !default;
@@ -218,8 +218,43 @@ body {
 
 .well {
 	color: $gray-dark;
+
 }
 
+.postfeed{
+	background: #ffffff;
+	border: 1px dotted $gray-light;
+	margin: 0.5em 0em;
+	padding: 0.5em 0.5em;
+}
 
+.backpanel {
+	background: $backpanel-color;
+	border: 1px dotted $gray-light;
+	margin: 0.5em 0em;
+	padding: 0.5em 2em;
+
+}
+
+.toppanel {
+	background: $backpanel-color;
+	border: 1px solid $gray-lighter;
+	margin: 0.5em 0em;
+	padding: 0.5em 2em;
+
+	&.darker {
+		background: $gray-lighter;
+	}
+
+}
+
+textarea {
+    resize: none;
+}
+
+a:hover {
+	text-decoration: none;
+
+}
 
 

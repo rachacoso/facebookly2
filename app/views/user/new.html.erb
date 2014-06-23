@@ -5,17 +5,22 @@
 
 <div class="container">
 
-<%= bootstrap_form_for User.new, url: '/signup' do |f| %>
+<%= bootstrap_form_for setup_user(User.new), url: '/signup' do |f| %>
 
 <div class="col-sm-8">
 	<div class="well">
 		<div class="row">
-			<div class="col-sm-6">
-				<%= f.text_field :firstname %>
-			</div>
-			<div class="col-sm-6">
-				<%= f.text_field :lastname %>
-			</div>
+
+		<%= f.fields_for :publicprofile do |ff| %>
+		  <div class="col-sm-6">
+		    <%= ff.text_field :firstname %>
+		  </div>
+		  <div class="col-sm-6">
+		    <%= ff.text_field :lastname %>
+		  </div>
+		<% end %>
+
+
 		</div>
 		<%= f.email_field :email %>
 		<%= f.password_field :password %>

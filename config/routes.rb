@@ -1,5 +1,5 @@
 Rails.application.routes.draw do
-  get '/' => 'home#front'
+  get '/' => 'home#front', as: 'homepage'
 
   get '/signup' => 'user#new'
   post '/signup' => 'user#create'

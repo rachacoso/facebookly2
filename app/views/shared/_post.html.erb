@@ -1,0 +1,16 @@
+
+<% (post.posted_by.id == @current_user.id)? link = "/" : link = "/view/#{post.posted_by.id}" %>
+<% (post.posted_by.id == @current_user.id)? poster = "You" : poster = "#{post.posted_by.publicprofile.firstname} #{post.posted_by.publicprofile.lastname}" %>	
+
+	
+	<div class="postfeed"><a href="<%= link %>"><%= poster %></a> said
+
+		<div class="toppanel">
+			<%= post.content %><br>
+			<% if post.post_photo_file_size %>
+				<%= image_tag post.post_photo(:medium) %>
+			<% end %>
+		</div>
+
+	<div class="text-right"><small><%= post.c_at.strftime("at %I:%M%p %Z on %m/%d/%Y") %></small></div>
+	</div>

@@ -1,0 +1,24 @@
+
+<% (who.id == @current_user.id)? postee = "Your" : postee = "#{who.publicprofile.firstname} #{who.publicprofile.lastname}\'s" %>	
+
+
+
+<div class="backpanel">
+	<h5> <span class="glyphicon glyphicon-list-alt"></span> <%= postee %> Wall </h5>
+	
+		<% if wall_posts.blank? %>
+			<h5>No Posts Yet!</h5>
+		<% else %>
+			<%= render partial: "shared/post", collection: wall_posts %>
+		<% end %>
+	
+	<div class="toppanel darker">
+		<h5>Post to <%= postee %> wall!</h5>
+		<%= bootstrap_form_for Post.new, url: '/post' do |f| %>
+			<%= f.hidden_field :postee_id, value: who.id %>
+			<%= f.text_area	:content, hide_label: true%>
+			<%= f.file_field :post_photo, label: "Add a photo to your post" %>
+			<%= f.submit "Post to #{postee} wall!" %>
+		<% end %>
+	</div>	<!-- .toppanel -->
+</div>	<!-- .backpanel -->

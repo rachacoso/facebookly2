@@ -2,15 +2,16 @@ class PostController < ApplicationController
 
 	def create
 
-		posted_to = User.find(params[:post][:postee_id])
-		posted_by = @current_user
+		post_to = User.find(params[:post][:postee_id])
+		post_by = @current_user
 
 
 	  post = Post.new
 		post.content = params[:post][:content]
+		post.post_photo = params[:post][:post_photo]
 
-		posted_to.postedtome.push(post)
-		posted_by.postedbyme.push(post)
+		post_to.posted_to_user.push(post)
+		post_by.posted_by_user.push(post)
 
 		redirect_to :back
 

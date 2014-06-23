@@ -5,8 +5,11 @@ class UserController < ApplicationController
 
 	def create
 		user = User.new
-		user.firstname = params[:user][:firstname]
-		user.lastname = params[:user][:lastname]
+		user.publicprofile = Publicprofile.new(
+			firstname: params[:user][:publicprofile_attributes][:firstname],
+			lastname: params[:user][:publicprofile_attributes][:lastname],
+			profile_photo: params[:user][:publicprofile_attributes][:profile_photo]
+		)
 		user.email = params[:user][:email]
 		user.password = params[:user][:password]
 		user.password_confirmation = params[:user][:password_confirmation]
@@ -22,14 +25,20 @@ class UserController < ApplicationController
 	def do_update
 
 		user = @current_user
-
-		user.firstname = params[:user][:firstname]
-		user.lastname = params[:user][:lastname]
+		user.publicprofile.firstname = params[:user][:publicprofile_attributes][:firstname]
+		user.publicprofile.lastname = params[:user][:publicprofile_attributes][:lastname]
+		user.publicprofile.profile_photo = params[:user][:publicprofile_attributes][:profile_photo]
 		user.email = params[:user][:email]
 		user.save!
 
 		redirect_to '/preferences/edituser', :flash => { :userupdate => "Your have successfully updated your profile!" }
 
 	end
+
+  private
+
+  def user_params
+    params.require(:user).permit(publicprofile_attributes: [:profile_photo])
+  end
 
 end

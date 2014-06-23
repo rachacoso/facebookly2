@@ -1,10 +1,10 @@
 GIT
   remote: git://github.com/mongoid/mongoid.git
-  revision: 027929d23993e33cd50c92b4928548e412ea87ee
+  revision: 1fcb8721b0222ad4de7677f69fbf543a3f75b5f4
   specs:
-    mongoid (4.0.0.rc1)
+    mongoid (4.0.0.rc2)
       activemodel (~> 4.0)
-      moped (~> 2.0.0.rc1)
+      moped (~> 2.0.0.rc2)
       origin (~> 2.1)
       tzinfo (>= 0.3.37)
 
@@ -44,6 +44,10 @@ GEM
     bootstrap_form (2.1.1)
     bson (2.3.0)
     builder (3.2.2)
+    climate_control (0.0.3)
+      activesupport (>= 3.0)
+    cocaine (0.5.4)
+      climate_control (>= 0.0.3, < 1.0)
     coffee-rails (4.0.1)
       coffee-script (>= 2.2.0)
       railties (>= 4.0.0, < 5.0)
@@ -67,14 +71,21 @@ GEM
       mime-types (~> 1.16)
       treetop (~> 1.4.8)
     mime-types (1.25.1)
-    minitest (5.3.4)
-    moped (2.0.0.rc1)
+    minitest (5.3.5)
+    mongoid-paperclip (0.0.9)
+      paperclip (>= 2.3.6)
+    moped (2.0.0.rc2)
       bson (~> 2.2)
       connection_pool (~> 2.0)
       optionable (~> 0.2.0)
     multi_json (1.10.1)
     optionable (0.2.0)
     origin (2.1.1)
+    paperclip (4.1.1)
+      activemodel (>= 3.0.0)
+      activesupport (>= 3.0.0)
+      cocaine (~> 0.5.3)
+      mime-types
     polyglot (0.3.5)
     rack (1.5.2)
     rack-test (0.6.2)
@@ -143,6 +154,7 @@ DEPENDENCIES
   jbuilder (~> 2.0)
   jquery-rails
   mongoid (~> 4.0.0.rc1)!
+  mongoid-paperclip
   rails (= 4.1.1)
   rest-client
   sass-rails (~> 4.0.3)

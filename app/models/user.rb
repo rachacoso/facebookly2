@@ -3,21 +3,21 @@ class User
 	include ActiveModel::SecurePassword 	# this, along with the 
 																				# 'has_secure_password' below
 																				# enables all the pwd hashing
-	field :firstname, type: String
-	field :lastname, type: String
+
 	field :email, type: String
 	field :password_digest, type: String
 
 	validate :email, presence: true, uniqueness: true
 
-	embeds_one :publicprofile
-
+	embeds_one :publicprofile, :cascade_callbacks => true
+	accepts_nested_attributes_for :publicprofile
 	embeds_one :privateprofile
+	accepts_nested_attributes_for :privateprofile
 
-	has_and_belongs_to_many :postedtome, class_name: "Post", inverse_of: :postees
-	has_and_belongs_to_many :postedbyme, class_name: "Post", inverse_of: :posters
+	has_many :posted_to_user, class_name: "Post", inverse_of: :posted_to
+	has_many :posted_by_user, class_name: "Post", inverse_of: :posted_by
 
-	embeds_many :friends do 
+	has_many :friends do 
 		def i_asked
 			where(reciprocal: false, requestor: true)
 		end

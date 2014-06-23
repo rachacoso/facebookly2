@@ -7,19 +7,21 @@
   <%= csrf_meta_tags %>
 </head>
 <body>
+<div class="container">
 
-	<div class="well well-sm">
-		<h4> <a href="/">Facebook.ly</a></h4>
-	</div>
+<div class="backpanel">
+	<h4> <a href="/">Facebook.ly</a></h4>
+</div>
 
-<div class="well well-sm">
+<div class="backpanel">
 	<% if @current_user %>
 
-		Hello <%= @current_user.firstname %>! | <a href="/logout">Logout</a> | <a href="/preferences/edituser">Edit your info</a> | <%= Time.now.strftime("%I:%M:%S %Z") %>
+		<%= image_tag show_profile_photo(@current_user, :small), size: "100x100" %> 
+		<strong>Hello <%= @current_user.publicprofile.firstname %>!</strong> | <a href="/logout"> <span class="glyphicon glyphicon-off"></span> logout</a> | <a href="/preferences/edituser"> <span class="glyphicon glyphicon-pencil"></span> edit profile</a> <span class="pull-right"><%= Time.now.strftime("%I:%M:%S %Z") %></span>
 
 	<% else %>
 
-	<a href="/signup">Join Facebookly</a> or <a href="/login">Login</a>
+	<a href="/signup"> <span class="glyphicon glyphicon-plus"></span> Join </a> | <a href="/login"> <span class="glyphicon glyphicon-off"></span> login</a>
 
 	<% end %>
 </div>
@@ -27,5 +29,8 @@
 
 <%= yield %>
 
+
+
+</div> <!-- .container -->
 </body>
 </html>

@@ -46,4 +46,6 @@ gem 'bootstrap-sass', '~> 3.1.1'
 
 gem 'bootstrap_form'
 
+gem "mongoid-paperclip", :require => "mongoid_paperclip"
+
 

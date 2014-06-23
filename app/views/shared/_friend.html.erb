@@ -1,0 +1,25 @@
+
+
+<%= image_tag show_profile_photo(friend, :small), size: "25x25" %>  
+<a href='/view/<%= friend.id %>'>  <%= friend.publicprofile.firstname %> <%= friend.publicprofile.lastname %> </a>
+
+<% case connection %>
+<% when "i_requested" %>
+
+	<a href='/friend/nevermind/<%= friend.id %>'>  <small> ( cancel friend request ) </small> </a>
+
+<% when "requested_me" %>
+
+	<% unless @friendrequestmessages[friend.id.to_s].blank? %>
+		says &quot;<%= @friendrequestmessages[friend.id.to_s] %>&quot;
+	<% end %>
+	<a href='/friend/accept/<%= friend.id %>'>  <small> ( i accept ) </small> </a> <a href='/friend/deny/<%= friend.id %>'>  <small> ( perhaps another time ) </small> </a>
+
+<% when "none" %>
+
+	<a href='/friend/<%= friend.id %>'> <small> ( add as friend ) </small></a>
+
+<% end %>
+
+<br>
+				

@@ -1,37 +1,18 @@
 
-<div class="container">
 
-	<h4><%= @friend.firstname %><br>
-	<%= @friend.lastname %></h4>
+<div class="backpanel">
+	
+	<%= image_tag show_profile_photo(@friend, :small), size: "100x100" %>
+	<h4><%= @friend.publicprofile.firstname %>	<%= @friend.publicprofile.lastname %></h4> <%= link_to 'Home', homepage_path %>
 
 
-	<div class="container wall">
-		
-		<h3> <%= @friend.firstname %> <%= @friend.lastname %>'s Wall </h3>
-		<% if @wall_posts.empty? %>
-			<h5>No Posts Yet!</h5>
-		<% else %>
+	<div class="toppanel">
+		<h5> <%= @friend.publicprofile.firstname %>'s Friends </h5>
 
-			<% @wall_posts.each do |post| %>
-				
-				<p>
-				<%= post.posters.first.firstname %> said<br>
-				<%= post.content %><br>
-				<%= post.c_at.strftime("at %I:%M%p %Z on %m/%d/%Y") %>
-				</p>
-			<% end %>
+		<%= render partial: "shared/friend", collection: @friends_of_friend, locals: {connection: "friends"} %>
 
-		<% end %>
-		
-		<div class="well well-sm wallpostform">
-		<%= bootstrap_form_for Post.new, url: '/post' do |f| %>
-			<%= f.hidden_field :postee_id, value: @friend.id%>
-			<%= f.text_area	:content %>
-		
-			<%= f.submit "Post to #{@friend.firstname}'s wall!" %>
+	</div> <!-- .toppanel -->
 
-		<% end %>
-		</div>	<!-- .well .well-sm -->
-	</div> <!-- .container .wall-->
+	<%= render 	partial: "shared/wall", locals: { wall_posts: @wall_posts, who: @friend } %>
 
-</div> <!-- .container -->
+</div> <!-- .backpanel -->

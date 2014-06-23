@@ -1,32 +1,44 @@
-<div class="well well-sm"><h3>Update Your Info</h3></div>
 
+<div class="row">
+	<div class="col-sm-8">
+		<div class="backpanel">
+			<h4>Update Your Info</h4>
 
+			<%= bootstrap_form_for @current_user, url: '/preferences/edituser' do |f| %>
 
-<%= bootstrap_form_for @current_user, url: '/preferences/edituser' do |f| %>
+			<div class="toppanel">
+				<% if flash[:userupdate] %>
+					<div class="alert alert-success alert-dismissable">
+						<button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+						<%= flash[:userupdate] %>
+					</div>
+				<% end %>
+			
 
-<div class="col-sm-8">
+				<%= f.fields_for :publicprofile do |ff| %>
+					<div class="row">
+					  <div class="col-sm-6">
+					    <%= ff.text_field :firstname %>
+					  </div>
+					  <div class="col-sm-6">
+					    <%= ff.text_field :lastname %>
+					  </div>
+					</div>
+					<div class="row">
+						<div class="col-sm-12">
+							<%= image_tag show_profile_photo(@current_user, :small) %>
+							<%= ff.file_field :profile_photo %>
+						</div>
+					</div>
+				<% end %>
 
-
-	<div class="well">
-		<% if flash[:userupdate] %>
-		<div class="alert alert-success alert-dismissable">
-		<button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
-		<%= flash[:userupdate] %>
-		</div>
-		<% end %>
-		<div class="row">
-			<div class="col-sm-6">
-				<%= f.text_field :firstname %>
-			</div>
-			<div class="col-sm-6">
-				<%= f.text_field :lastname %>
-			</div>
-		</div>
-		<%= f.email_field :email %>
-		<%= f.password_field :password, label: "Old Password" %>
-		<%= f.password_field :new_password %>
-		<%= f.password_field :new_password_confirmation %>
-		<%= f.submit 'Update your info' %>
-	</div>
-</div>
+				<%= f.email_field :email %>
+				<%= f.password_field :password, label: "Old Password" %>
+				<%= f.password_field :new_password %>
+				<%= f.password_field :new_password_confirmation %>
+				<%= f.submit 'Update your info' %>
+			</div><!-- .toppanel -->
+		</div><!-- .backpanel -->
+	</div> <!-- .col-sm-8 -->
+</div><!-- .row -->
 <% end %>

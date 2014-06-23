@@ -34,7 +34,8 @@ class HomeController < ApplicationController
 			@allpeople = User.not_in(:_id => @inqueue).order_by(:lastname.asc)
 
 			# get wall posts
-			@wall_posts = @current_user.postedtome
+			@wall_posts = @current_user.posted_to_user
+			@wall_posts_feed = Post.all.desc('_id').limit(10)
 
 
 		end

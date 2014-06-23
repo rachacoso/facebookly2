@@ -1,24 +1,28 @@
-<div class="well well-sm">
-	<a href="/">&lt; Whoa! I'm not ready for friends yet!</a>
-</div>
 
-<div class="container">
-
-<%= bootstrap_form_for Friend.new, url: '/friend' do |f| %>
 
 <div class="col-sm-8">
-	<div class="well">
+	<div class="backpanel">
+
+		<%= bootstrap_form_for Friend.new, url: '/friend' do |f| %>
+
 		<div class="row">
 			<div class="col-sm-6">
-				<h3><small>send a friend request to </small><br> <%= @friend_to_be.firstname %> <%= @friend_to_be.lastname %> </h3>
+				<h3><small>send a friend request to </small><br> <%= @friend_to_be.publicprofile.firstname %> <%= @friend_to_be.publicprofile.lastname %> </h3>
 			</div>
 			<div class="col-sm-6">
 				<%= f.text_area :initial_request_message %>
 			</div>
 		</div>
-		<%= hidden_field_tag 'friendid', @friend_to_be.id %>
-		<%= f.submit 'Hey! Be my friend!' %>
-		<a href="/">&lt; Whoa! I'm not ready for friends yet!</a>
-	</div>
-</div>
-<% end %>
+		<div class="row">
+			<div class="col-sm-12">
+				<div class="text-right">
+					<a href="/" >&lt; Whoa! I'm not ready for friends yet!</a>
+
+					<%= hidden_field_tag 'friendid', @friend_to_be.id %>
+					<%= f.submit 'Hey! Be my friend!' %>
+				</div>
+			</div> <!-- .col-sm-10 -->
+		</div> <!-- .row -->
+	</div> <!-- .backpanel -->
+</div> <!-- .col-sm-8 -->
+		<% end %>
