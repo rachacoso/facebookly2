@@ -87,7 +87,31 @@
 			</div>
 		</div>
 		<div class="col-sm-6">
-			<%= render partial: "shared/friendtease", collection: @all_people %>
+			<% if @all_people.count < 3 %> 
+				<%# put in dummy pics/names if less than 3 profiles in db%>
+
+				<div class="backpanel">
+					<h3>
+					<img alt="Jake" src="/images/profile1.jpg" height="100"/> Jake
+					</h3>
+				</div> <!-- .backpanel -->
+
+				<div class="backpanel">
+					<h3>
+					<img alt="Jong-il" src="/images/profile2.jpg" height="100" /> Jong-il
+					</h3>
+				</div> <!-- .backpanel -->
+
+				<div class="backpanel">
+					<h3>
+					<img alt="Diana" src="/images/profile3.jpg" height="100" /> Diana
+					</h3>
+				</div> <!-- .backpanel -->
+			<% else %>
+				<%= render partial: "shared/friendtease", collection: @all_people %>
+			<% end %>
+
 		</div> <!-- .col-sm-7 -->
 	</div> <!-- .row -->
+
 <% end %>
