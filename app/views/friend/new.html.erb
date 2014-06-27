@@ -7,7 +7,14 @@
 
 		<div class="row">
 			<div class="col-sm-6">
-				<h3><small>send a friend request to </small><br> <%= @friend_to_be.publicprofile.firstname %> <%= @friend_to_be.publicprofile.lastname %> </h3>
+				<div class="row"  style="padding-top: 1em">
+					<div class="col-sm-2">
+						<%= image_tag show_profile_photo(@friend_to_be, :medium), size: "50x50" %>
+					</div>
+					<div class="col-sm-10">
+						<h3><small>send a friend request to </small><br> <%= @friend_to_be.publicprofile.firstname %> <%= @friend_to_be.publicprofile.lastname %> </h3>
+					</div>
+				</div>
 			</div>
 			<div class="col-sm-6">
 				<%= f.text_area :initial_request_message %>
@@ -16,7 +23,7 @@
 		<div class="row">
 			<div class="col-sm-12">
 				<div class="text-right">
-					<a href="/" >&lt; Whoa! I'm not ready for friends yet!</a>
+					<a href="/" ><small>&lt; Whoa! I'm not ready for friends yet!</small></a>
 
 					<%= hidden_field_tag 'friendid', @friend_to_be.id %>
 					<%= f.submit 'Hey! Be my friend!' %>

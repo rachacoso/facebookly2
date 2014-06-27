@@ -1,6 +1,6 @@
 
-<div class="well well-sm">
-	<a href="/">Home</a>
+<div class="backpanel">
+	<a href="/">Cancel</a>
 </div>
 
 <div class="container">
@@ -8,17 +8,24 @@
 <%= bootstrap_form_for setup_user(User.new), url: '/signup' do |f| %>
 
 <div class="col-sm-8">
-	<div class="well">
+	<div class="backpanel">
 		<div class="row">
 
-		<%= f.fields_for :publicprofile do |ff| %>
-		  <div class="col-sm-6">
-		    <%= ff.text_field :firstname %>
-		  </div>
-		  <div class="col-sm-6">
-		    <%= ff.text_field :lastname %>
-		  </div>
-		<% end %>
+				<%= f.fields_for :publicprofile do |ff| %>
+					<div class="row">
+					  <div class="col-sm-6">
+					    <%= ff.text_field :firstname %>
+					  </div>
+					  <div class="col-sm-6">
+					    <%= ff.text_field :lastname %>
+					  </div>
+					</div>
+					<div class="row">
+						<div class="col-sm-12">
+							<%= ff.file_field :profile_photo %>
+						</div>
+					</div>
+				<% end %>
 
 
 		</div>

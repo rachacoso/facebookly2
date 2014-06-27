@@ -14,6 +14,6 @@ class Post
 	field :content, type: String
 
 	belongs_to :posted_by, class_name: "User", inverse_of: :posted_by_user
-	belongs_to :posted_to, class_name: "User", inverse_of: :posted_to_
+	belongs_to :posted_to, class_name: "User", inverse_of: :posted_to_user
 
 end

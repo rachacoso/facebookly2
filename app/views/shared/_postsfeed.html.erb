@@ -3,12 +3,15 @@
 <% (post.posted_to.id == @current_user.id)? to_link = "/" : to_link = "/view/#{post.posted_to.id}" %>
 
 	<div class="postfeed">
-		<a href="<%= by_link %>"><%= post.posted_by.publicprofile.firstname %> <%= post.posted_by.publicprofile.lastname %></a> <span class="glyphicon glyphicon-arrow-right"></span> <span class="glyphicon glyphicon-list-alt"></span>  <a href="<%= to_link %>"><%= post.posted_to.publicprofile.firstname %> <%= post.posted_to.publicprofile.lastname %></a> <br>
-		<%= post.content %>
+		<a href="<%= by_link %>"><%= image_tag show_profile_photo(post.posted_by, :small), size: "20x20" %><%= post.posted_by.publicprofile.firstname %> <%= post.posted_by.publicprofile.lastname %></a> <span class="glyphicon glyphicon-arrow-right"></span> <span class="glyphicon glyphicon-list-alt"></span>  <a href="<%= to_link %>"><%= image_tag show_profile_photo(post.posted_to, :small), size: "20x20" %><%= post.posted_to.publicprofile.firstname %> <%= post.posted_to.publicprofile.lastname %></a> 
+		<div class="toppanel">
+			<%= post.content %>
 			<% if post.post_photo_file_size %>
 				<br>
 				<%= image_tag post.post_photo(:medium) %>
 			<% end %>
-		<br>
-		<small><%= post.c_at.strftime("at %I:%M%p %Z on %m/%d/%Y") %></small>
+		</div>
+		<div class="text-right">
+			<small><%= post.c_at.strftime("at %I:%M%p %Z on %m/%d/%Y") %></small>
+		</div>
 	</div>

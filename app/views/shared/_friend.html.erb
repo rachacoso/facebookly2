@@ -10,8 +10,8 @@
 
 <% when "requested_me" %>
 
-	<% unless @friendrequestmessages[friend.id.to_s].blank? %>
-		says &quot;<%= @friendrequestmessages[friend.id.to_s] %>&quot;
+	<% unless @current_user.friends.get_message(friend.id.to_s).blank? %>
+		says &quot;<%= @current_user.friends.get_message(friend.id.to_s) %>&quot;
 	<% end %>
 	<a href='/friend/accept/<%= friend.id %>'>  <small> ( i accept ) </small> </a> <a href='/friend/deny/<%= friend.id %>'>  <small> ( perhaps another time ) </small> </a>
 

@@ -34,5 +34,8 @@ class User
 
 	has_secure_password
 
+	def get_friends(filterlist)
+		User.in(_id: filterlist).order_by(:'publicprofile.lastname'.asc)
+	end
 
 end
