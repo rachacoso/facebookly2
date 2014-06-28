@@ -4,18 +4,33 @@ class UserController < ApplicationController
 	end
 
 	def create
-		user = User.new
-		user.publicprofile = Publicprofile.new(
-			firstname: params[:user][:publicprofile_attributes][:firstname],
-			lastname: params[:user][:publicprofile_attributes][:lastname],
-			profile_photo: params[:user][:publicprofile_attributes][:profile_photo]
-		)
-		user.email = params[:user][:email]
-		user.password = params[:user][:password]
-		user.password_confirmation = params[:user][:password_confirmation]
-		user.save!
-		session[:user_id] = user.id.to_s
-		redirect_to '/'
+
+		if User.where(email: params[:user][:email]).exists?
+
+			flash[:notice] = "Someone else is already using that email address"
+			render :new
+
+		elsif params[:user][:password] != params[:user][:password_confirmation]
+
+			flash[:notice] = "Passwords did not match"
+			render :new
+
+		else
+
+			user = User.new
+			user.publicprofile = Publicprofile.new(
+				firstname: params[:user][:publicprofile_attributes][:firstname],
+				lastname: params[:user][:publicprofile_attributes][:lastname],
+				profile_photo: params[:user][:publicprofile_attributes][:profile_photo]
+			)
+			user.email = params[:user][:email]
+			user.password = params[:user][:password]
+			user.password_confirmation = params[:user][:password_confirmation]
+			user.save!
+			session[:user_id] = user.id.to_s
+			redirect_to '/'
+
+		end
 
 	end
 
